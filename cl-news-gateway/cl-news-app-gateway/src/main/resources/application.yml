@@ -1,0 +1,38 @@
+server:
+  port: 6003
+spring:
+  application:
+    name: news-app-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+      routes:
+      - id: news-article
+        uri: lb://news-article
+        predicates:
+        - Path=/article/**
+        filters:
+        - StripPrefix= 1
+      - id: news-appuser
+        uri: lb://news-appuser
+        predicates:
+        - Path=/app/**
+        filters:
+        - StripPrefix= 1
+      - id: news-admin
+        uri: lb://news-admin
+        predicates:
+        - Path=/admin/**
+        filters:
+        - StripPrefix= 1

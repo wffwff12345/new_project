@@ -1,0 +1,91 @@
+package com.news.wemedia.dto;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * <p>
+ * 文章信息表，存储已发布的文章
+ * </p>
+ *
+ * @author mcm
+ * @since 2021-06-29
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("ap_article")
+@ApiModel(description="文章信息表，存储已发布的文章")
+public class ApArticle implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private Long id;
+
+    /**
+     * 标题
+     */
+    @ApiModelProperty(value = "标题")
+    @TableField("title")
+    private String title;
+
+    /**
+     * 作者昵称
+     */
+    @ApiModelProperty(value = "作者昵称")
+    @TableField("author_name")
+    private String authorName;
+
+    /**
+     * 文章所属频道ID
+     */
+    @ApiModelProperty(value = "文章所属频道ID")
+    @TableField("channel_id")
+    private Integer channelId;
+
+    /**
+     * 频道名称
+     */
+    @ApiModelProperty(value = "频道名称")
+    @TableField("channel_name")
+    private String channelName;
+
+    @ApiModelProperty(value = "")
+    @TableField("layout")
+    private Integer layout;
+
+    @ApiModelProperty(value = "文章图片")
+    @TableField("images")
+    private String images;
+
+
+    @ApiModelProperty(value = "文章标签最多3个 逗号分隔")
+    @TableField("labels")
+    private String labels;
+
+    @ApiModelProperty(value = "创建时间")
+    @TableField("created_time")
+    private Date createdTime;
+
+    /**
+     * 发布时间
+     */
+    @ApiModelProperty(value = "发布时间")
+    @TableField("publish_time")
+    private Date publishTime;
+
+
+
+
+}

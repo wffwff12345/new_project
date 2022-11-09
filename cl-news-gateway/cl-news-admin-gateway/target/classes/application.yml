@@ -1,0 +1,33 @@
+server:
+  port: 6001
+spring:
+  application:
+    name: news-admin-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        - id: wemedia
+          uri: lb://news-wemedia
+          predicates:
+            - Path=/wemedia/**
+          filters:
+            - StripPrefix= 1
+        - id: admin
+          uri: lb://news-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix= 1
+        
